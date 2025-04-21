@@ -166,6 +166,7 @@
       },
       "share": "Share this product",
       "sold_out": "Sold out",
+      "add_to_cart_quantity": "Add to cart ([quantity] left)",
       "unavailable": "Unavailable",
       "vendor": "Vendor",
       "value_unavailable": "{{ option_value }} - Unavailable",
@@ -177,7 +178,9 @@
       "taxes_included": "Taxes included.",
       "duties_included": "Duties included.",
       "duties_and_taxes_included": "Duties and taxes included.",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout."
+      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
+      "color_swatches": "Color swatches",
+      "select_variant_color": "Select {{ color }}"
     },
     "modal": {
       "label": "Media gallery"

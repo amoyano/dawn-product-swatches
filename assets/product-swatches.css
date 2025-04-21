@@ -1,0 +1,6 @@
+.product-swatches {
+    z-index: 2;
+}
+.product-swatches .product-form__input {
+    border: none;
+}

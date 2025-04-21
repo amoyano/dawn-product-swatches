@@ -17,7 +17,9 @@
   %}
 {% endcomment %}
 {%- liquid
-  assign product_form_id = 'product-form-' | append: section.id
+  if product_form_id == blank
+    assign product_form_id = 'product-form-' | append: section.id
+  endif
 -%}
 
 {%- for value in option.values -%}
@@ -32,6 +34,14 @@
     else
       assign swatch_value = null
     endif
+    
+    assign current_variant = ''
+    assign variant_option = 'option' | append: option.position
+    for variant in product.variants
+      if variant[variant_option] == value
+        assign current_variant = variant
+      endif
+    endfor
 
     assign option_disabled = true
     if value.available
@@ -74,7 +84,8 @@
       visually_disabled: option_disabled,
       shape: block.settings.swatch_shape,
       help_text: help_text,
-      additional_props: input_dataset
+      additional_props: input_dataset,
+      current_variant: current_variant
     %}
   {%- elsif picker_type == 'button' -%}
     <input

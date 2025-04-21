@@ -22,6 +22,14 @@
   <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
+{%- if section.settings.quick_add == 'swatch' -%}
+  {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
+  {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
+  {{ 'component-swatch.css' | asset_url | stylesheet_tag }}
+  {{ 'product-swatches.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-swatches.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -341,8 +349,40 @@
         {
           "value": "bulk",
           "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_3"
+        },
+        {
+          "value": "swatch",
+          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_4"
         }
       ]
+    },
+    {
+      "id": "swatch_shape",
+      "label": "t:sections.main-collection-product-grid.settings.swatch_shape.label",
+      "type": "select",
+      "info": "t:sections.main-collection-product-grid.settings.swatch_shape.info",
+      "options": [
+        {
+          "value": "circle",
+          "label": "t:sections.main-collection-product-grid.settings.swatch_shape.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.main-collection-product-grid.settings.swatch_shape.options__2.label"
+        },
+        {
+          "value": "none",
+          "label": "t:sections.main-collection-product-grid.settings.swatch_shape.options__3.label"
+        }
+      ],
+      "default": "circle"
+    },
+    {
+      "type": "number",
+      "id": "quantity_threshold",
+      "default": 5,
+      "label": "t:sections.main-collection-product-grid.settings.quantity_threshold.label",
+      "info": "t:sections.main-collection-product-grid.settings.quantity_threshold.info"
     },
     {
       "type": "header",

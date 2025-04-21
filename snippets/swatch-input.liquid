@@ -13,6 +13,7 @@
   - shape: {String} swatch shape. Accepts 'square', defaults to circle (optional)
   - help_text: {String} additional content to render inside the label (optional)
   - additional_props: {String} (optional) additional properties to attach to the input
+  - current_variant: {VariantDrop} the current variant
 
   Usage:
    {% render 'swatch-input',
@@ -31,6 +32,12 @@
   name="{{ name }}"
   value="{{ value }}"
   form="{{ product_form_id }}"
+  {% if current_variant != blank %}
+    data-variant-id="{{ current_variant.id }}"
+    data-variant-image="{{ current_variant.featured_image.src | image_url: width: 400 }}"
+    data-variant-available="{{ current_variant.available | default: false }}"
+    data-variant-quantity="{{ current_variant.inventory_quantity | default: 0 }}"
+  {% endif %}
   class="swatch-input__input{% if visually_disabled %} visually-disabled{% endif %}"
   {% if checked %}
     checked
@@ -47,6 +54,6 @@
   title="{{ value }}"
   class="swatch-input__label{% if shape == 'square' %} swatch-input__label--square{% endif %}"
 >
-  {% render 'swatch', swatch: swatch, shape: shape %}
+  {% render 'swatch', swatch: swatch, shape: shape, current_variant: current_variant %}
   {{ help_text }}
 </label>
