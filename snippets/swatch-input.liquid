@@ -37,6 +37,8 @@
     data-variant-image="{{ current_variant.featured_image.src | image_url: width: 400 }}"
     data-variant-available="{{ current_variant.available | default: false }}"
     data-variant-quantity="{{ current_variant.inventory_quantity | default: 0 }}"
+    data-variant-price="{{ current_variant.price | money }}"
+    data-variant-compare-at-price="{{ current_variant.compare_at_price | money }}"
   {% endif %}
   class="swatch-input__input{% if visually_disabled %} visually-disabled{% endif %}"
   {% if checked %}

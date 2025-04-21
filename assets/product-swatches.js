@@ -24,7 +24,12 @@ class ProductSwatches extends HTMLElement {
       submitButtonSpan: 'span:not(.sold-out-message)',
       submitButtonSoldOutMessage: '.sold-out-message',
       cart: 'cart-notification, cart-drawer',
-      spinner: '.loading__spinner'
+      spinner: '.loading__spinner',
+      // Price related selectors within the product card
+      priceContainer: '.price',
+      priceRegular: '.price__regular .price-item--regular',
+      priceSale: '.price__sale .price-item--sale',
+      priceCompareAt: '.price__sale s.price-item--regular',
     };
 
     // DOM Elements
@@ -39,6 +44,11 @@ class ProductSwatches extends HTMLElement {
     this.submitButtonSoldOutMessage = this.submitButton?.querySelector(this.selectors.submitButtonSoldOutMessage);
     this.spinner = this.submitButton?.querySelector(this.selectors.spinner);
     this.cart = document.querySelector(this.selectors.cart);
+    // Price related elements
+    this.priceContainer = this.productCard?.querySelector(this.selectors.priceContainer);
+    this.priceRegularElement = this.priceContainer?.querySelector(this.selectors.priceRegular);
+    this.priceSaleElement = this.priceContainer?.querySelector(this.selectors.priceSale);
+    this.priceCompareAtElement = this.priceContainer?.querySelector(this.selectors.priceCompareAt);
 
     // State
     this.selectedVariantId = this.variantInput?.value;
@@ -101,7 +111,9 @@ class ProductSwatches extends HTMLElement {
         variantImage,
         variantId,
         variantAvailable: variantAvailableStr,
-        variantQuantity: variantQuantityStr
+        variantQuantity: variantQuantityStr,
+        variantPrice,
+        variantCompareAtPrice
     } = clickedSwatch.dataset;
 
     const variantAvailable = variantAvailableStr === 'true';
@@ -117,6 +129,7 @@ class ProductSwatches extends HTMLElement {
     this.variantInput.value = variantId;
 
     this.updateAddToCartButtonState(variantAvailable, variantQuantity);
+    this.updatePrice(variantPrice, variantCompareAtPrice);
   }
 
   /**
@@ -323,6 +336,10 @@ class ProductSwatches extends HTMLElement {
       this.updateAddToCartButtonState(false);
       swatch.dataset.variantAvailable = 'false';
     }
+
+    // Update price after potential quantity change affects availability/display
+    const { variantPrice, variantCompareAtPrice } = swatch?.dataset || {};
+    this.updatePrice(variantPrice, variantCompareAtPrice);
   }
 
   /**
@@ -335,7 +352,9 @@ class ProductSwatches extends HTMLElement {
        const {
            variantId,
            variantAvailable: availableStr,
-           variantQuantity: quantityStr
+           variantQuantity: quantityStr,
+           variantPrice,
+           variantCompareAtPrice
        } = initialSelectedSwatch.dataset;
 
        const available = availableStr === 'true';
@@ -345,11 +364,45 @@ class ProductSwatches extends HTMLElement {
        this.updateAddToCartButtonState(available, quantity);
        this.selectedVariantId = variantId;
        this.variantInput.value = variantId;
+       this.updatePrice(variantPrice, variantCompareAtPrice);
 
     } else {
         this.updateAddToCartButtonState(false);
         this.selectedVariantId = null;
         this.variantInput.value = '';
+    }
+  }
+
+  /**
+   * Updates the displayed price on the product card based on the selected variant.
+   * @param {string} price - The formatted price of the selected variant.
+   * @param {string | null} compareAtPrice - The formatted compare-at price (or null/empty if none).
+   */
+  updatePrice(price, compareAtPrice) {
+    if (!this.priceContainer || !price) return;
+
+    const hasComparePrice = compareAtPrice && compareAtPrice !== price;
+
+    if (hasComparePrice) {
+      if (this.priceRegularElement) this.priceRegularElement.textContent = price;
+      if (this.priceSaleElement) this.priceSaleElement.textContent = price;
+      if (this.priceCompareAtElement) {
+        this.priceCompareAtElement.textContent = compareAtPrice;
+         const saleContainer = this.priceCompareAtElement.closest('.price__sale');
+         if (saleContainer) saleContainer.classList.remove(this.classes.hidden);
+         const regularContainer = this.priceContainer.querySelector('.price__regular');
+          if(regularContainer) regularContainer.classList.add(this.classes.hidden);
+      }
+      this.priceContainer.classList.add('price--on-sale');
+    } else {
+      if (this.priceRegularElement) this.priceRegularElement.textContent = price;
+       const saleContainer = this.priceContainer.querySelector('.price__sale');
+       if (saleContainer) saleContainer.classList.add(this.classes.hidden);
+       const regularContainer = this.priceContainer.querySelector('.price__regular');
+       if(regularContainer) regularContainer.classList.remove(this.classes.hidden);
+
+      this.priceContainer.classList.remove('price--on-sale');
+      if (this.priceCompareAtElement) this.priceCompareAtElement.textContent = '';
     }
   }
 }
