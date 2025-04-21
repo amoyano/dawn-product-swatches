@@ -3,7 +3,7 @@
 This project implements product swatches with real-time quantity updates and 'add to cart' functionality directly on collection pages.
 
 ### Preview Links
-* [Preview](https://am-product-swatches.myshopify.com/collections/snowboard)
+* [Preview](https://am-product-swatches.myshopify.com/collections/all)
 * Password: naysto
 
 ## Setup Instructions
@@ -22,7 +22,7 @@ This project implements product swatches with real-time quantity updates and 'ad
 
 The core functionality is handled by the `assets/product-swatches.js` component and the corresponding Liquid snippet (likely `snippets/product-swatches.liquid` or similar, integrated into product cards).
 
-1.  **Component Initialization:** The `ProductSwatches` custom element initializes event listeners for swatch clicks and form submissions. It reads variant data (ID, image, availability, quantity) embedded in the HTML via data attributes. The visual appearance (color) of each swatch is determined by a **variant-level metafield named `color`** (namespace and key likely `custom.color` or similar), which should contain a valid CSS color value (e.g., `#FFFFFF`, `red`).
+1.  **Component Initialization:** The `ProductSwatches` custom element initializes event listeners for swatch clicks and form submissions. It reads variant data (ID, image, availability, quantity) embedded in the HTML via data attributes. The visual appearance (color) of each swatch is determined by the color property of the variant.
 2.  **Swatch Interaction:** Clicking a swatch updates the main product image (if available) and highlights the selected swatch using `updateImage()` and `updateSwatchSelection()`. It also updates the hidden variant ID input within the embedded form.
 3.  **Add to Cart Button State:** The `updateAddToCartButtonState()` method controls the 'Add to Cart' button's text and disabled state based on the selected variant's availability (`data-variant-available`) and quantity (`data-variant-quantity`). It displays remaining quantity when below a threshold (`data-quantity-threshold`).
 4.  **AJAX Add to Cart:** The `handleAddSubmission()` method handles the form submission via AJAX (`fetch`).
