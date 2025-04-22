@@ -171,6 +171,7 @@
       "vendor": "Vendor",
       "value_unavailable": "{{ option_value }} - Unavailable",
       "last_item_added": "Last one added!",
+      "added": "Added!",
       "variant_sold_out_or_unavailable": "Variant sold out or unavailable",
       "video_exit_message": "{{ title }} opens full screen video in same window.",
       "view_full_details": "View full details",

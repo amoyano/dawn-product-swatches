@@ -52,7 +52,8 @@ class ProductSwatches extends HTMLElement {
 
     // State
     this.selectedVariantId = this.variantInput?.value;
-    this.quantityThreshold = parseInt(this.getAttribute('data-quantity-threshold') || '1', 10); 
+    this.quantityThreshold = parseInt(this.getAttribute('data-quantity-threshold') || '1', 10);
+    this.addedMessageTimeout = null;
 
     this.handleSwatchClick = this.handleSwatchClick.bind(this);
     this.handleAddSubmission = this.handleAddSubmission.bind(this);
@@ -311,11 +312,16 @@ class ProductSwatches extends HTMLElement {
 
   /**
    * Updates the quantity dataset attributes on a swatch element after an item is added to the cart,
-   * and triggers an update of the Add to Cart button state.
+   * and triggers an update of the Add to Cart button state, potentially showing a temporary "Added!" message.
    * @param {HTMLElement} swatch - The swatch element corresponding to the added variant.
    */
   updateVariantQuantity(swatch) {
     let currentQuantity = parseInt(swatch.dataset.variantQuantity, 10);
+
+    if (this.addedMessageTimeout) {
+      clearTimeout(this.addedMessageTimeout);
+      this.addedMessageTimeout = null;
+    }
 
     if (!isNaN(currentQuantity)) {
       const originalQuantity = currentQuantity;
@@ -325,21 +331,33 @@ class ProductSwatches extends HTMLElement {
       const isAvailable = currentQuantity > 0;
       swatch.dataset.variantAvailable = String(isAvailable);
 
-      this.updateAddToCartButtonState(isAvailable, currentQuantity);
-
-      if (originalQuantity === 1 && !isAvailable) {
+      if (!isAvailable && originalQuantity === 1) {
           this.submitButtonSpan.textContent = window.variantStrings?.lastItemAdded ?? "Last one added!";
           swatch.classList.add(this.classes.visuallyDisabled);
+          this.submitButton.disabled = true;
+          this.submitButton.setAttribute('aria-disabled', 'true');
+      } else if (isAvailable) {
+          const addedText = window.variantStrings?.added ?? "Added!";
+          this.submitButtonSpan.textContent = addedText;
+          this.submitButton.disabled = true;
+          this.submitButton.setAttribute('aria-disabled', 'true');
+
+          this.addedMessageTimeout = setTimeout(() => {
+              const latestQuantity = parseInt(swatch.dataset.variantQuantity, 10);
+              const latestAvailable = latestQuantity > 0;
+              if (swatch.dataset.variantId === this.selectedVariantId) {
+                this.updateAddToCartButtonState(latestAvailable, latestQuantity);
+              }
+              this.addedMessageTimeout = null;
+          }, 3000);
+      } else {
+         this.updateAddToCartButtonState(isAvailable, currentQuantity);
       }
     } else {
       console.warn('ProductSwatches: Could not parse variant quantity for update.');
       this.updateAddToCartButtonState(false);
       swatch.dataset.variantAvailable = 'false';
     }
-
-    // Update price after potential quantity change affects availability/display
-    const { variantPrice, variantCompareAtPrice } = swatch?.dataset || {};
-    this.updatePrice(variantPrice, variantCompareAtPrice);
   }
 
   /**
