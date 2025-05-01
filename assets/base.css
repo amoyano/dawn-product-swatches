@@ -3605,3 +3605,18 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+/* Header Search V2 */
+.header-search-v2 {
+  .search-modal {
+    position: relative;
+    min-height: unset;
+    max-height: 70px;
+    opacity: 1;
+    border-bottom: unset;
+
+    .search-modal__content {
+      padding: 0 16px;
+    }
+  }
+}
