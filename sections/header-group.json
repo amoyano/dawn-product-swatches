@@ -43,7 +43,7 @@
           "type": "banner",
           "settings": {
             "banner_text": "Bundle and Save Up to 50% off",
-            "text_color": "#FFFFFF",
+            "text_color": "#ffffff",
             "background_color": "#056839",
             "font_size_desktop": 16,
             "font_size_mobile": 14
@@ -51,21 +51,23 @@
         },
         "collection_block_4THERi": {
           "type": "collection_block",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Rectangle_10.png",
             "heading": "T-SHIRTS",
             "link": "shopify://collections",
-            "text_color": "#FFFFFF",
+            "text_color": "#ffffff",
             "background_color": "#056839"
           }
         },
         "collection_block_BLHYdg": {
           "type": "collection_block",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Rectangle_12.jpg",
             "heading": "HOODIES",
             "link": "shopify://collections/frontpage",
-            "text_color": "#FFFFFF",
+            "text_color": "#ffffff",
             "background_color": "#056839"
           }
         }
