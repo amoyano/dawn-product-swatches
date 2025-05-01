@@ -38,6 +38,31 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "banner_4hkyXY": {
+          "type": "banner",
+          "settings": {
+            "banner_text": "Bundle and Save Up to 50% off",
+            "text_color": "#FFFFFF",
+            "background_color": "#056839",
+            "font_size_desktop": 16,
+            "font_size_mobile": 14
+          }
+        },
+        "collection_block_4THERi": {
+          "type": "collection_block",
+          "settings": {
+            "heading": "",
+            "link": "",
+            "text_color": "#FFFFFF",
+            "background_color": "#056839"
+          }
+        }
+      },
+      "block_order": [
+        "banner_4hkyXY",
+        "collection_block_4THERi"
+      ],
       "settings": {
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
