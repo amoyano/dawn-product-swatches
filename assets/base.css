@@ -3623,7 +3623,7 @@ details-disclosure > details {
       padding: 0 22px;
 
       .search__button {
-        left: 0;
+        left: 10px;
       }
     }
   }
