@@ -68,12 +68,54 @@
             "text_color": "#ffffff",
             "background_color": "#056839"
           }
+        },
+        "collection_block_rnCjPQ": {
+          "type": "collection_block",
+          "settings": {
+            "heading": "",
+            "link": "",
+            "text_color": "#FFFFFF",
+            "background_color": "#056839"
+          }
+        },
+        "collection_block_DdhG7c": {
+          "type": "collection_block",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_14.jpg",
+            "heading": "BUNDLE & SAVE",
+            "link": "shopify://collections/frontpage",
+            "text_color": "#FFFFFF",
+            "background_color": "#056839"
+          }
+        },
+        "collection_block_K3q9YC": {
+          "type": "collection_block",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_15.jpg",
+            "heading": "SHORTS",
+            "link": "shopify://collections/frontpage",
+            "text_color": "#FFFFFF",
+            "background_color": "#056839"
+          }
+        },
+        "collection_block_CaFG9g": {
+          "type": "collection_block",
+          "settings": {
+            "heading": "SHOP ALL",
+            "link": "shopify://collections/frontpage",
+            "text_color": "#FFFFFF",
+            "background_color": "#056839"
+          }
         }
       },
       "block_order": [
         "banner_4hkyXY",
         "collection_block_4THERi",
-        "collection_block_BLHYdg"
+        "collection_block_BLHYdg",
+        "collection_block_rnCjPQ",
+        "collection_block_DdhG7c",
+        "collection_block_K3q9YC",
+        "collection_block_CaFG9g"
       ],
       "settings": {
         "logo_position": "middle-left",
