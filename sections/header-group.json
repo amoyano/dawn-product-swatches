@@ -43,6 +43,7 @@
           "type": "banner",
           "settings": {
             "banner_text": "Bundle and Save Up to 50% off",
+            "link": "",
             "text_color": "#ffffff",
             "background_color": "#056839",
             "font_size_desktop": 16,
@@ -56,7 +57,9 @@
             "heading": "T-SHIRTS",
             "link": "shopify://collections",
             "text_color": "#ffffff",
-            "background_color": "#056839"
+            "background_color": "#056839",
+            "border_color": "#bfbfbf",
+            "has_shadow": false
           }
         },
         "collection_block_BLHYdg": {
@@ -66,7 +69,9 @@
             "heading": "HOODIES",
             "link": "shopify://collections/frontpage",
             "text_color": "#ffffff",
-            "background_color": "#056839"
+            "background_color": "#056839",
+            "border_color": "#bfbfbf",
+            "has_shadow": false
           }
         },
         "collection_block_rnCjPQ": {
@@ -76,7 +81,9 @@
             "heading": "SWEATPANTS",
             "link": "shopify://products/the-ln-hoodie",
             "text_color": "#ffffff",
-            "background_color": "#056839"
+            "background_color": "#056839",
+            "border_color": "#bfbfbf",
+            "has_shadow": true
           }
         },
         "collection_block_DdhG7c": {
@@ -86,7 +93,9 @@
             "heading": "BUNDLE & SAVE",
             "link": "shopify://collections/frontpage",
             "text_color": "#ffffff",
-            "background_color": "#056839"
+            "background_color": "#056839",
+            "border_color": "#bfbfbf",
+            "has_shadow": false
           }
         },
         "collection_block_K3q9YC": {
@@ -96,7 +105,9 @@
             "heading": "SHORTS",
             "link": "shopify://collections/frontpage",
             "text_color": "#ffffff",
-            "background_color": "#056839"
+            "background_color": "#056839",
+            "border_color": "#bfbfbf",
+            "has_shadow": false
           }
         },
         "collection_block_CaFG9g": {
@@ -105,7 +116,9 @@
             "heading": "SHOP ALL",
             "link": "shopify://collections/frontpage",
             "text_color": "#ffffff",
-            "background_color": "#056839"
+            "background_color": "#056839",
+            "border_color": "#bfbfbf",
+            "has_shadow": false
           }
         }
       },
