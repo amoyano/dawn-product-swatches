@@ -3640,6 +3640,8 @@ details-disclosure > details {
       display: block;
       position: relative;
       text-decoration: none;
+      height: 100%;
+      max-height: 175px;
   }
   .menu-drawer__collection-block img {
       display: block;
