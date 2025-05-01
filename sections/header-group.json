@@ -43,7 +43,7 @@
           "type": "banner",
           "settings": {
             "banner_text": "Bundle and Save Up to 50% off",
-            "link": "",
+            "link": "shopify://collections/automated-collection",
             "text_color": "#ffffff",
             "background_color": "#056839",
             "font_size_desktop": 16,
