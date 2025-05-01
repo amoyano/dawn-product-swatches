@@ -3609,7 +3609,9 @@ details-disclosure > details {
 
 /* Header Search V2 */
 .header-search-v2 {
+  box-shadow: 0 -4px 8px -2px #0000001A;
   margin-top: 1rem;
+
   .search-modal {
     position: relative;
     min-height: unset;
@@ -3618,7 +3620,7 @@ details-disclosure > details {
     border-bottom: unset;
 
     .search-modal__content {
-      padding: 0 16px;
+      padding: 0 22px;
 
       .search__button {
         left: 0;
@@ -3631,8 +3633,8 @@ details-disclosure > details {
   .menu-drawer__collection-blocks {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5px; 
-    padding: 5px;
+    gap: 16px; 
+    padding: 5px 22px;
   }
   .menu-drawer__collection-block {
       display: block;
@@ -3642,7 +3644,8 @@ details-disclosure > details {
   .menu-drawer__collection-block img {
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
   }
   .menu-drawer__collection-block .heading {
       position: absolute;
