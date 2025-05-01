@@ -3611,7 +3611,8 @@ details-disclosure > details {
 .header-search-v2 {
   box-shadow: 0 -4px 8px -2px #0000001A;
   margin-top: 1rem;
-
+  padding-top: 1rem;
+  
   .search-modal {
     position: relative;
     min-height: unset;
@@ -3634,7 +3635,7 @@ details-disclosure > details {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px; 
-    padding: 5px 22px;
+    padding: 5px 22px 22px 22px;
   }
   .menu-drawer__collection-block {
       display: block;
@@ -3667,14 +3668,17 @@ details-disclosure > details {
   }
 
   .menu-drawer__navigation-v2 { 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 20px;
     padding: 22px;
     border-top: 1px solid #d2d2d2;
   }
+  .menu-drawer__navigation-v2 .list-menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
   .menu-drawer__navigation-v2 .menu-drawer__menu-item {
     font-size: 1.2rem;
+    padding: 0;
     font-weight: 400;
     text-decoration-line: underline;
   }
