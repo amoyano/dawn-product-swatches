@@ -3658,6 +3658,9 @@ details-disclosure > details {
       padding: 0.5rem;
       text-align: center;
       font-weight: bold; 
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
   }
   .menu-drawer__collection-blocks > a:last-child:nth-child(odd) {
     grid-column: 1 / -1; 
@@ -3666,7 +3669,13 @@ details-disclosure > details {
     padding: 1rem;
     text-align: center;
   }
-
+  .menu-drawer__banner { 
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .menu-drawer__banner a {
+    text-decoration: underline;
+  }
   .menu-drawer__navigation-v2 { 
     padding: 22px 0;
     border-top: 1px solid #d2d2d2;
