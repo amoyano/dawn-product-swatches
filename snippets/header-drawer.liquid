@@ -36,7 +36,13 @@
               }
             </style>
             <div class="menu-drawer__banner menu-drawer__banner--{{ block.id }}" style="background-color: {{ block.settings.background_color }}; color: {{ block.settings.text_color }};" {{ block.shopify_attributes }}>
-              {{ block.settings.banner_text }}
+              {% if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}">
+              {% endif %}
+                {{ block.settings.banner_text }}
+              {% if block.settings.link != blank %}
+                  </a>
+              {% endif %}
             </div>
           {% endif %}
           {%- if collections_blocks != blank -%}
@@ -53,7 +59,7 @@
                     background-color: {{ block.settings.background_color }};
                 }
               </style>
-              
+
                 {% if block.settings.image != blank %}
                   {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }}
                 {% endif %}
@@ -66,7 +72,7 @@
           {%- endif -%}
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu list-menu" role="list">
-              {%- for link in section.settings.menu.links -%}
+              {%- for link in section.settings.menu_drawer.links -%}
                 <li class="menu-drawer__menu-item">
                   <a
                     href="{{ link.url }}"
