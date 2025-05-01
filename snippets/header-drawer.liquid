@@ -6,7 +6,7 @@
 {% endcomment %}
 
 {%- assign collections_blocks = section.blocks | where: 'type', 'collection_block' -%}
-{%- assign banner = section.blocks | where: 'type', 'banner' -%}
+{%- assign banner = section.blocks | where: 'type', 'banner' | first -%}
 
 <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
   <details id="Details-menu-drawer-container" class="menu-drawer-container">
@@ -24,7 +24,7 @@
         <div class="menu-drawer__navigation-container">
           {%- render 'header-search-v2' -%}
 
-          {% if banner  != blank%}
+          {% if banner != blank%}
             <style>
               .menu-drawer__banner--{{ block.id }} {
                 font-size: {{ block.settings.font_size_mobile }}px;
@@ -70,6 +70,7 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    text-decoration: underline;
                   }
                 {% endif %}
               </style>
