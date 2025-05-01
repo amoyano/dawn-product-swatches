@@ -2469,7 +2469,7 @@ input[type='checkbox'] {
   }
 
   .header__icons {
-    display: none;
+    display: none !important;
   }
 
   .header--mobile-left .header__heading,
@@ -2757,6 +2757,7 @@ details[open] > .header__submenu {
   animation: animateMenuOpen var(--duration-default) ease;
   animation-fill-mode: forwards;
   z-index: 1;
+  -webkit-animation: animateMenuOpen var(--duration-default) ease;
 }
 
 @media (prefers-reduced-motion) {
