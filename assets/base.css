@@ -3691,5 +3691,6 @@ details-disclosure > details {
     padding: 0;
     font-weight: 400;
     text-decoration-line: underline;
+    text-underline-offset: unset;
   }
 }
