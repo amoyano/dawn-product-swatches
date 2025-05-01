@@ -5,6 +5,9 @@
   {% render 'header-drawer' %}
 {% endcomment %}
 
+{%- assign collections_blocks = section.blocks | where: 'type', 'collection_block' -%}
+{%- assign banner = section.blocks | where: 'type', 'banner' -%}
+
 <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
   <details id="Details-menu-drawer-container" class="menu-drawer-container">
     <summary
@@ -21,51 +24,46 @@
         <div class="menu-drawer__navigation-container">
           {%- render 'header-search-v2' -%}
 
-          {%- for block in section.blocks -%}
-            {%- case block.type -%}
-              {%- when 'banner' -%}
-                <div class="menu-drawer__banner" style="background-color: {{ block.settings.background_color }}; color: {{ block.settings.text_color }};">
-                  <style>
-                    .menu-drawer__banner {
-                      font-size: {{ block.settings.font_size_mobile }}px;
-                    }
-                    @media screen and (min-width: 750px) {
-                      .menu-drawer__banner {
-                        font-size: {{ block.settings.font_size_desktop }}px;
-                      }
-                    }
-                  </style>
-                  {{ block.settings.banner_text }}
-                </div>
-              {%- when 'collection_block' -%}
-                {%- if forloop.first -%}
-                  <div class="menu-drawer__collection-blocks">
-                {%- endif -%}
-                <a href="{{ block.settings.link | default: "#" }}" class="menu-drawer__collection-block" style="background-color: {{ block.settings.background_color }}; color: {{ block.settings.text_color }};">
-
-                <style>
-                    .menu-drawer__collection-block .heading {
-                      background-color: {{ block.settings.background_color }};
-                      color: {{ block.settings.text_color }};
-                  }
-                  .menu-drawer__collection-block {
-                      color: {{ block.settings.text_color }};
-                      background-color: {{ block.settings.background_color }};
-                  }
-                </style>
-                  {% if block.settings.image != blank %}
-                    {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }}
-                  {% endif %}
-                  {% if block.settings.heading != blank %}
-                    <span class="heading">{{ block.settings.heading }}</span>
-                  {% endif %}
-                </a>
-                {%- if forloop.last -%}
-                  </div>
-                {%- endif -%}
-            {%- endcase -%}
-          {%- endfor -%}
-
+          {% if banner  != blank%}
+            <style>
+              .menu-drawer__banner--{{ block.id }} {
+                font-size: {{ block.settings.font_size_mobile }}px;
+              }
+              @media screen and (min-width: 750px) {
+                .menu-drawer__banner--{{ block.id }} {
+                  font-size: {{ block.settings.font_size_desktop }}px;
+                }
+              }
+            </style>
+            <div class="menu-drawer__banner menu-drawer__banner--{{ block.id }}" style="background-color: {{ block.settings.background_color }}; color: {{ block.settings.text_color }};" {{ block.shopify_attributes }}>
+              {{ block.settings.banner_text }}
+            </div>
+          {% endif %}
+          {%- if collections_blocks != blank -%}
+            <div class="menu-drawer__collection-blocks">
+            {%- for block in collections_blocks -%}
+              <a href="{{ block.settings.link | default: "#" }}" class="menu-drawer__collection-block menu-drawer__collection-block--{{ block.id }}" style="background-color: {{ block.settings.background_color }}; color: {{ block.settings.text_color }};" {{ block.shopify_attributes }}>
+              <style>
+                  .menu-drawer__collection-block--{{ block.id }} .heading {
+                    background-color: {{ block.settings.background_color }};
+                    color: {{ block.settings.text_color }};
+                }
+                .menu-drawer__collection-block--{{ block.id }} {
+                    color: {{ block.settings.text_color }};
+                    background-color: {{ block.settings.background_color }};
+                }
+              </style>
+              
+                {% if block.settings.image != blank %}
+                  {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+                {% endif %}
+                {% if block.settings.heading != blank %}
+                  <span class="heading">{{ block.settings.heading }}</span>
+                {% endif %}
+              </a>
+            {%- endfor -%}
+            </div>
+          {%- endif -%}
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu list-menu" role="list">
               {%- for link in section.settings.menu.links -%}
