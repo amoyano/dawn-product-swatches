@@ -72,8 +72,9 @@
         "collection_block_rnCjPQ": {
           "type": "collection_block",
           "settings": {
-            "heading": "",
-            "link": "",
+            "image": "shopify://shop_images/Rectangle_13.jpg",
+            "heading": "SWEATPANTS",
+            "link": "shopify://products/the-ln-hoodie",
             "text_color": "#FFFFFF",
             "background_color": "#056839"
           }
