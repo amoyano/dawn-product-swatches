@@ -1,0 +1,27 @@
+{%- comment -%}
+  Renders the navigation menu within the header drawer.
+
+  Accepts:
+  - menu: {Object} Linklist object for the menu.
+
+  Usage:
+  {% render 'header-drawer-nav', menu: section.settings.menu %}
+{%- endcomment -%}
+
+<nav class="menu-drawer__navigation-v2">
+  <ul class="menu-drawer__menu list-menu" role="list">
+    {%- for link in menu.links -%}
+      <li class="menu-drawer__menu-item">
+        <a
+          href="{{ link.url }}"
+          class="menu-drawer__menu-item link link--text list-menu__item list-menu__item--link{% if link.active %} menu-drawer__menu-item--active{% endif %}"
+          {% if link.current %}
+            aria-current="page"
+          {% endif %}
+        >
+          {{ link.title | escape }}
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav> 

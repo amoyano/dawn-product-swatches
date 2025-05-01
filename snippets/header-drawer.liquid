@@ -23,89 +23,9 @@
       <div class="menu-drawer__inner-container">
         <div class="menu-drawer__navigation-container">
           {%- render 'header-search-v2' -%}
-
-          {% if banner != blank%}
-            {% for block in banner %}
-              <style>
-                .menu-drawer__banner--{{ block.id }} {
-                  font-size: {{ block.settings.font_size_mobile }}px;
-                }
-                .menu-drawer__banner--{{ block.id }} a {
-                  color: {{ block.settings.text_color }};
-                }
-              @media screen and (min-width: 750px) {
-                .menu-drawer__banner--{{ block.id }} {
-                  font-size: {{ block.settings.font_size_desktop }}px;
-                }
-              }
-              </style>
-              <div class="menu-drawer__banner menu-drawer__banner--{{ block.id }}" style="background-color: {{ block.settings.background_color }}; color: {{ block.settings.text_color }};" {{ block.shopify_attributes }}>
-                {% if block.settings.link != blank %}
-                  <a href="{{ block.settings.link }}">
-                {% endif %}
-                  {{ block.settings.banner_text }}
-                {% if block.settings.link != blank %}
-                  </a>
-                {% endif %}
-              </div>
-            {% endfor %}
-          {% endif %}
-          {%- if collections_blocks != blank -%}
-            <div class="menu-drawer__collection-blocks">
-            {%- for block in collections_blocks -%}
-              <a href="{{ block.settings.link | default: "#" }}" class="menu-drawer__collection-block menu-drawer__collection-block--{{ block.id }}" style="background-color: {{ block.settings.background_color }}; color: {{ block.settings.text_color }};" {{ block.shopify_attributes }}>
-              <style>
-                  .menu-drawer__collection-block--{{ block.id }} .heading {
-                    background-color: {{ block.settings.background_color }};
-                    color: {{ block.settings.text_color }};
-                }
-                .menu-drawer__collection-block--{{ block.id }} {
-                    color: {{ block.settings.text_color }};
-                    background-color: {{ block.settings.background_color }};
-                    border: 1px solid {{ block.settings.border_color }};
-                    {% if block.settings.has_shadow %}
-                      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-                    {% endif %}
-                }
-
-                {% if block.settings.image == blank %}
-                  .menu-drawer__collection-block--{{ block.id }} .heading {
-                    top: 50%;
-                    transform: translateY(-50%);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    text-decoration: underline;
-                  }
-                {% endif %}
-              </style>
-                {% if block.settings.image != blank %}
-                  {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }}
-                {% endif %}
-                {% if block.settings.heading != blank %}
-                  <span class="heading">{{ block.settings.heading }}</span>
-                {% endif %}
-              </a>
-            {%- endfor -%}
-            </div>
-          {%- endif -%}
-          <nav class="menu-drawer__navigation-v2">
-            <ul class="menu-drawer__menu list-menu" role="list">
-              {%- for link in section.settings.menu.links -%}
-                <li class="menu-drawer__menu-item">
-                  <a
-                    href="{{ link.url }}"
-                    class="menu-drawer__menu-item link link--text list-menu__item list-menu__item--link{% if link.active %} menu-drawer__menu-item--active{% endif %}"
-                    {% if link.current %}
-                      aria-current="page"
-                    {% endif %}
-                  >
-                    {{ link.title | escape }}
-                  </a>
-                </li>
-              {%- endfor -%}
-            </ul>
-          </nav>
+          {% render 'header-drawer-banner', banner: banner %}
+          {% render 'header-drawer-collection-blocks', collections_blocks: collections_blocks %}
+          {% render 'header-drawer-nav', menu: section.settings.menu %}
         </div>
       </div>
     </div>

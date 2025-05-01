@@ -1,0 +1,54 @@
+{%- comment -%}
+  Renders the collection blocks section within the header drawer.
+
+  Accepts:
+  - collections_blocks: {Array} Block objects of type 'collection_block'.
+
+  Usage:
+  {% render 'header-drawer-collection-blocks', collections_blocks: collections_blocks %}
+{%- endcomment -%}
+
+{%- if collections_blocks != blank -%}
+  <div class="menu-drawer__collection-blocks">
+    {%- for block in collections_blocks -%}
+      <a
+        href="{{ block.settings.link | default: "#" }}"
+        class="menu-drawer__collection-block menu-drawer__collection-block--{{ block.id }}"
+        style="background-color: {{ block.settings.background_color }}; color: {{ block.settings.text_color }};"
+        {{ block.shopify_attributes }}
+      >
+        <style>
+          .menu-drawer__collection-block--{{ block.id }} .heading {
+            background-color: {{ block.settings.background_color }};
+            color: {{ block.settings.text_color }};
+          }
+          .menu-drawer__collection-block--{{ block.id }} {
+            color: {{ block.settings.text_color }};
+            background-color: {{ block.settings.background_color }};
+            border: 1px solid {{ block.settings.border_color }};
+            {% if block.settings.has_shadow %}
+              box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            {% endif %}
+          }
+
+          {% if block.settings.image == blank %}
+            .menu-drawer__collection-block--{{ block.id }} .heading {
+              top: 50%;
+              transform: translateY(-50%);
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              text-decoration: underline;
+            }
+          {% endif %}
+        </style>
+        {%- if block.settings.image != blank -%}
+          {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+        {%- endif -%}
+        {%- if block.settings.heading != blank -%}
+          <span class="heading">{{ block.settings.heading }}</span>
+        {%- endif -%}
+      </a>
+    {%- endfor -%}
+  </div>
+{%- endif -%} 
