@@ -62,8 +62,9 @@
         "collection_block_BLHYdg": {
           "type": "collection_block",
           "settings": {
-            "heading": "",
-            "link": "",
+            "image": "shopify://shop_images/Rectangle_12.jpg",
+            "heading": "HOODIES",
+            "link": "shopify://collections/frontpage",
             "text_color": "#FFFFFF",
             "background_color": "#056839"
           }
