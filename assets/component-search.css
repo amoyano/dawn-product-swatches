@@ -1,6 +1,6 @@
-.search__input.field__input {
+/* .search__input.field__input {
   padding-right: 9.8rem;
-}
+} */
 
 .search__button {
   left: 0;
@@ -8,7 +8,7 @@
 }
 
 .reset__button {
-  right: calc(var(--inputs-border-width) + 4.4rem);
+  right: 0;
   top: var(--inputs-border-width);
 }
 

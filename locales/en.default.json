@@ -36,7 +36,7 @@
       "previous": "Previous page"
     },
     "search": {
-      "search": "Search",
+      "search": "Search Here",
       "reset": "Clear search term"
     },
     "cart": {
@@ -379,7 +379,7 @@
     "language_label": "Language",
     "update_language": "Update language",
     "update_country": "Update country/region",
-    "search": "Search",
+    "search": "Search Here",
     "popular_countries_regions": "Popular countries/regions",
     "country_results_count": "{{ count }} countries/regions found"
   },
