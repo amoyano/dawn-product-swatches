@@ -1,0 +1,65 @@
+{% comment %}
+  Renders color swatches and an embedded product form for a product card.
+
+  Accepts:
+  - card_product: {Object} Product Liquid object.
+{% endcomment %}
+
+{%- liquid
+  assign color_option_key = 'color'
+  assign product_color_option = null
+  for option in card_product.options_with_values
+    assign option_name = option.name | downcase
+    if option_name == color_option_key
+      assign product_color_option = option
+      break
+    endif
+  endfor
+-%}
+
+{% comment %} Render swatches only if the color option exists {% endcomment %}
+{%- liquid
+  assign swatch_block_settings = section.settings.swatch_shape
+  assign product_form_id = 'product-swatch-form-' | append: section_id | append: '-' | append: card_product.id
+  assign current_variant = card_product.selected_or_first_available_variant
+-%}
+<product-swatches class="product-swatches" data-product-id="{{ card_product.id }}" data-section-id="{{ section_id }}" data-quantity-threshold="{{ section.settings.quantity_threshold }}">
+  {% comment %} Wrap with product-form and add form element {% endcomment %}
+    <form method="post" action="{{ routes.cart_add_url }}" id="{{ product_form_id }}" accept-charset="UTF-8" class="form" enctype="multipart/form-data" novalidate="novalidate" data-type="add-to-cart-form">
+      {% comment %} Hidden input for the variant ID {% endcomment %}
+      <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+      <fieldset class="product-form__input product-form__input--swatch">
+        <legend class="visually-hidden">{{ 'products.product.color_swatches' | t }}</legend>
+        <div class="product-swatches__list" role="radiogroup" aria-label="{{ 'products.product.color_swatches' | t }}">
+          {% render 'product-variant-options',
+              product: card_product,
+              option: product_color_option,
+              block: swatch_block_settings,
+              picker_type: 'swatch',
+              product_form_id: product_form_id
+          %}
+        </div>
+      </fieldset>
+
+      {% comment %} Add to Cart Button Structure {% endcomment %}
+      <div class="product-form__buttons">
+        <button
+          type="submit"
+          name="add"
+          class="product-form__submit button button--full-width button--primary"
+          {% if current_variant == null or current_variant.available == false %}disabled aria-disabled="true"{% else %}aria-disabled="false"{% endif %}
+        >
+          <span class="submit-button-text">
+            {%- if current_variant == null or current_variant.available == false -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- else -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- endif -%}
+          </span>
+          <span class="sold-out-message hidden">{{ 'products.product.sold_out' | t }}</span>
+          {%- render 'loading-spinner' -%}
+        </button>
+      </div>
+    </form>
+</product-swatches>

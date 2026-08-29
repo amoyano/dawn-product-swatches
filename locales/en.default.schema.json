@@ -1827,8 +1827,26 @@
           "options": {
             "option_1": "None",
             "option_2": "Standard",
-            "option_3": "Bulk"
+            "option_3": "Bulk",
+            "option_4": "Swatch"
           }
+        },
+        "swatch_shape": {
+          "label": "Swatch",
+          "info": "Learn more about [swatches](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) on product options",
+          "options__1": {
+            "label": "Circle"
+          },
+          "options__2": {
+            "label": "Square"
+          },
+          "options__3": {
+            "label": "None"
+          }
+        },
+        "quantity_threshold": {
+          "label": "Quantity threshold",
+          "info": "The number of items that will be shown as 'Add to cart (x left)' instead of 'Add to cart'"
         },
         "columns_mobile": {
           "label": "Mobile columns",

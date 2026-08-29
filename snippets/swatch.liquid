@@ -19,6 +19,8 @@
     assign swatch_focal_point = swatch.image.presentation.focal_point
   elsif swatch.color
     assign swatch_value = 'rgb(' | append: swatch.color.rgb | append: ')'
+  elsif current_variant.metafields.custom.color
+    assign swatch_value = current_variant.metafields.custom.color
   endif
 -%}
 

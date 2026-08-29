@@ -17,7 +17,9 @@
   %}
 {% endcomment %}
 {%- liquid
-  assign product_form_id = 'product-form-' | append: section.id
+  if product_form_id == blank
+    assign product_form_id = 'product-form-' | append: section.id
+  endif
 -%}
 
 {%- for value in option.values -%}
@@ -32,6 +34,14 @@
     else
       assign swatch_value = null
     endif
+    
+    assign current_variant = ''
+    assign variant_option = 'option' | append: option.position
+    for variant in product.variants
+      if variant[variant_option] == value
+        assign current_variant = variant
+      endif
+    endfor
 
     assign option_disabled = true
     if value.available
@@ -40,7 +50,7 @@
   -%}
 
   {%- capture input_id -%}
-    {{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}
+    {{ product.id }}-{{ option.position }}-{{ forloop.index0 -}}
   {%- endcapture -%}
 
   {%- capture input_name -%}
@@ -63,19 +73,7 @@
       <span class="visually-hidden">{{ value | escape }}</span>
       {{ label_unavailable }}
     {%- endcapture -%}
-    {%
-      render 'swatch-input',
-      id: input_id,
-      name: input_name,
-      value: value | escape,
-      swatch: value.swatch,
-      product_form_id: product_form_id,
-      checked: value.selected,
-      visually_disabled: option_disabled,
-      shape: block.settings.swatch_shape,
-      help_text: help_text,
-      additional_props: input_dataset
-    %}
+    {% render 'swatch-input', id: input_id, name: input_name, value: value, swatch: value.swatch, product_form_id: product_form_id, checked: value.selected, visually_disabled: option_disabled, shape: block.settings.swatch_shape, help_text: help_text, additional_props: input_dataset, current_variant: current_variant %}
   {%- elsif picker_type == 'button' -%}
     <input
       type="radio"
@@ -118,3 +116,30 @@
     </option>
   {%- endif -%}
 {%- endfor -%}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%
+          render 'swatch-input',
+          id: input_id,
+          name: input_name,
+          value: value | escape,
+          swatch: value.swatch,
+          product_form_id: product_form_id,
+          checked: value.selected,
+          visually_disabled: option_disabled,
+          shape: block.settings.swatch_shape,
+          help_text: help_text,
+          additional_props: input_dataset,
+          current_variant: current_variant
+        %}
+  to: "{% render 'swatch-input', id: input_id, name: input_name, value: value, swatch:
+    value.swatch, product_form_id: product_form_id, checked: value.selected, visually_disabled:
+    option_disabled, shape: block.settings.swatch_shape, help_text: help_text, additional_props:
+    input_dataset, current_variant: current_variant %}"
+  position: 2089..2404
+{% endcomment %}
